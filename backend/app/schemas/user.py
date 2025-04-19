@@ -1,13 +1,16 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
-class UserCreate(BaseModel):
-    name: str
-    email: EmailStr
-
+# Used to show output (never includes password)
 class UserOut(BaseModel):
     id: int
-    name: str
-    email: EmailStr
+    email: str
+    full_name: str
 
     class Config:
         orm_mode = True
+
+# Used during registration
+class UserCreate(BaseModel):
+    email: str
+    full_name: str
+    password: str
